@@ -1,23 +1,27 @@
-import logo from './logo.svg';
+import { TextField, Button } from '@mui/material';
+import React, { useState } from 'react';
 import './App.css';
+import List from './List';
 
 function App() {
+
+  const [todo, setTodo] = useState('');
+  const [list, setList] = useState([]);
+
+  const addTodo = () => {
+    if(!list) setList([todo])
+    else setList([...list, todo])
+    setTodo('');
+  }
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <h1>TO-DO</h1>
+      <TextField value={todo} onChange={(e) => setTodo(e.target.value)} id="filled-basic" label="Add todo" variant="filled" />
+      <br/>
+      <Button variant="contained" disabled={todo.length==0} onClick={() => addTodo()}>Add</Button>
+      <br/>
+      <List list={list} setList={setList}/>
     </div>
   );
 }
