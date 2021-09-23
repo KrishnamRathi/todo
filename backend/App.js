@@ -32,7 +32,7 @@ app.get('/todo', (req, res) => { // Read
 })
 
 app.put('/todo', (req, res) => { // Update
-  Todo.updateOne({"_id": req.body._id}, {body: req.body.todo}, (err, doc) => {
+  Todo.updateOne({_id: req.body._id}, {body: req.body.todo}, (err, doc) => {
     if(err) res.status(400).json(err);
     else res.status(200).json(doc);
   })
